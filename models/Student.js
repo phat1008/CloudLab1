@@ -1,20 +1,10 @@
 const mongoose = require('mongoose');
 
-// Khai bao Schema theo đúng yêu cầu: studentId, name, email
 const studentSchema = new mongoose.Schema({
-  studentId: { 
-    type: String, 
-    required: true, 
-    unique: true 
-  },
-  name: { 
-    type: String, 
-    required: true 
-  },
-  email: { 
-    type: String, 
-    required: true 
-  }
-}, { timestamps: true });
+    mssv: { type: String, required: true },
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    major: { type: String }
+});
 
 module.exports = mongoose.model('Student', studentSchema);
