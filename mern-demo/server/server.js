@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-// 1. Phải khởi tạo app trước tiên
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -61,6 +60,50 @@ app.post('/api/students', async (req, res) => {
     } catch (error) {
         console.error('❌ Lỗi khi thêm sinh viên vào DB:', error);
         res.status(500).json({ message: 'Thêm sinh viên thất bại!', error: error.message });
+    }
+});
+
+// Xóa sinh viên theo ID (_id của MongoDB)
+app.delete('/api/students/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedStudent = await Student.findByIdAndDelete(id);
+        
+        if (!deletedStudent) {
+            return res.status(404).json({ message: 'Không tìm thấy sinh viên cần xóa!' });
+        }
+
+        console.log('🗑️ Đã xóa sinh viên:', deletedStudent);
+        res.status(200).json({ message: 'Xóa sinh viên thành công!' });
+    } catch (error) {
+        console.error('❌ Lỗi khi xóa sinh viên:', error);
+        res.status(500).json({ message: 'Xóa sinh viên thất bại!', error: error.message });
+    }
+});
+
+// Cập nhật thông tin sinh viên theo ID
+app.put('/api/students/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updateData = {
+            mssv: req.body.id || req.body.mssv,
+            studentId: req.body.id || req.body.mssv,
+            name: req.body.name,
+            email: req.body.email,
+            major: req.body.major || ''
+        };
+
+        const updatedStudent = await Student.findByIdAndUpdate(id, updateData, { new: true });
+
+        if (!updatedStudent) {
+            return res.status(404).json({ message: 'Không tìm thấy sinh viên cần cập nhật!' });
+        }
+
+        console.log('✏️ Đã cập nhật sinh viên:', updatedStudent);
+        res.status(200).json({ message: 'Cập nhật sinh viên thành công!', student: updatedStudent });
+    } catch (error) {
+        console.error('❌ Lỗi khi cập nhật sinh viên:', error);
+        res.status(500).json({ message: 'Cập nhật sinh viên thất bại!', error: error.message });
     }
 });
 

@@ -5,13 +5,12 @@ import StudentList from './StudentList';
 export default function App() {
   const [refreshTrigger, setRefreshTrigger] = useState(false);
 
-  // Hàm xử lý thêm sinh viên gửi dữ liệu lên Backend
   const handleAddStudent = async (formData) => {
     try {
       const response = await fetch('http://localhost:5000/api/students', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json', // ⚠️ Bắt buộc phải có để Backend phân tích được JSON
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
@@ -23,8 +22,6 @@ export default function App() {
       }
 
       alert('Thêm sinh viên thành công!');
-      
-      // Kích hoạt load lại danh sách sinh viên sau khi thêm mới thành công
       setRefreshTrigger(prev => !prev);
       
     } catch (error) {
@@ -34,16 +31,14 @@ export default function App() {
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
+    <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto', color: '#fff' }}>
       <h1>Quản Lý Sinh Viên Cloud Lab</h1>
       
-      {/* Component form thêm sinh viên */}
       <StudentForm onStudentAdded={handleAddStudent} />
 
       <hr style={{ margin: '20px 0' }} />
 
-      {/* Component hiển thị danh sách sinh viên từ Backend */}
-      <StudentList key={refreshTrigger} />
+      <StudentList onRefresh={refreshTrigger} />
     </div>
   );
 }
