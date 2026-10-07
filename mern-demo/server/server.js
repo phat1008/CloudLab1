@@ -21,7 +21,7 @@ mongoose.connect("mongodb+srv://admin_user:168322@cluster0.ggxjxsw.mongodb.net/c
 
 // Route kiểm tra API
 app.get('/api/hello', (req, res) => {
-    res.json({ message: 'Hello from MERN backend server!' });
+    res.json({ message: 'Hello from backend...' });
 });
 
 // Lấy danh sách sinh viên từ MongoDB
