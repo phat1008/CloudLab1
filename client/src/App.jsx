@@ -33,14 +33,22 @@ export default function App() {
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto', color: '#fff' }}>
-      <h1>Quản Lý Sinh Viên Cloud Lab</h1>
-      
-      <StudentForm onStudentAdded={handleAddStudent} />
+    <div style={{ 
+      minHeight: '100vh', 
+      backgroundColor: '#121218', 
+      color: '#ffffff', 
+      padding: '30px 20px', 
+      boxSizing: 'border-box' 
+    }}>
+      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <h1 style={{ textAlign: 'center', color: '#61dafb', marginBottom: '25px' }}>Quản Lý Sinh Viên Cloud Lab</h1>
+        
+        <StudentForm onStudentAdded={handleAddStudent} />
 
-      <hr style={{ margin: '20px 0' }} />
+        <hr style={{ margin: '30px 0', borderColor: '#333' }} />
 
-      <StudentList onRefresh={refreshTrigger} />
+        <StudentList onRefresh={refreshTrigger} />
+      </div>
     </div>
   );
 }
