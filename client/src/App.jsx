@@ -35,17 +35,18 @@ export default function App() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      backgroundColor: '#121218', 
-      color: '#ffffff', 
-      padding: '30px 20px', 
-      boxSizing: 'border-box' 
+      backgroundColor: '#0f172a', 
+      color: '#f8fafc', 
+      padding: '40px 20px', 
+      boxSizing: 'border-box',
+      fontFamily: 'system-ui, -apple-system, sans-serif'
     }}>
-      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-        <h1 style={{ textAlign: 'center', color: '#61dafb', marginBottom: '25px' }}>Quản Lý Sinh Viên Cloud Lab</h1>
+      <div style={{ maxWidth: '850px', margin: '0 auto', backgroundColor: '#1e293b', padding: '30px', borderRadius: '16px', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.3)', border: '1px solid #334155' }}>
+        <h1 style={{ textAlign: 'center', color: '#38bdf8', marginBottom: '30px', fontSize: '28px', fontWeight: 'bold' }}>Quản Lý Sinh Viên Cloud Lab</h1>
         
         <StudentForm onStudentAdded={handleAddStudent} />
 
-        <hr style={{ margin: '30px 0', borderColor: '#333' }} />
+        <hr style={{ margin: '30px 0', borderColor: '#334155' }} />
 
         <StudentList onRefresh={refreshTrigger} />
       </div>
