@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import StudentForm from './StudentForm';
 import StudentList from './StudentList';
 
+const API_URL = import.meta.env.VITE_API_URL || 'https://mern-backend-235221.onrender.com';
+
 export default function App() {
   const [refreshTrigger, setRefreshTrigger] = useState(false);
 
   const handleAddStudent = async (formData) => {
     try {
-      const response = await fetch('http://localhost:5000/api/students', {
+      const response = await fetch(`${API_URL}/api/students`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

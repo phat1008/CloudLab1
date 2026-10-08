@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+const API_URL = import.meta.env.VITE_API_URL || 'https://mern-backend-235221.onrender.com';
+
 export default function StudentList({ onRefresh }) {
   const [students, setStudents] = useState([]);
   const [editingId, setEditingId] = useState(null);
@@ -7,7 +9,7 @@ export default function StudentList({ onRefresh }) {
 
   const fetchStudents = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/students');
+      const res = await fetch(`${API_URL}/api/students`);
       const data = await res.json();
       setStudents(data);
     } catch (err) {
@@ -23,7 +25,7 @@ export default function StudentList({ onRefresh }) {
     if (!window.confirm('Bạn có chắc chắn muốn xóa sinh viên này?')) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/students/${id}`, {
+      const response = await fetch(`${API_URL}/api/students/${id}`, {
         method: 'DELETE',
       });
       const data = await response.json();
@@ -50,7 +52,7 @@ export default function StudentList({ onRefresh }) {
 
   const handleUpdate = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/students/${id}`, {
+      const response = await fetch(`${API_URL}/api/students/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(editForm),
