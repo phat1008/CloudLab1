@@ -5,7 +5,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'https://mern-backend-235221.onr
 export default function StudentList({ onRefresh }) {
   const [students, setStudents] = useState([]);
   const [editingId, setEditingId] = useState(null);
-  const [editForm, setEditForm] = useState({ mssv: '', name: '', email: '', major: '' });
+  const [editForm, setEditForm] = useState({ id: '', name: '', email: '', major: '' });
 
   const fetchStudents = async () => {
     try {
@@ -43,7 +43,7 @@ export default function StudentList({ onRefresh }) {
   const handleEditClick = (student) => {
     setEditingId(student._id);
     setEditForm({
-      mssv: student.mssv || student.id || student.studentId || '',
+      id: student.id || student.mssv || student.studentId || '',
       name: student.name || '',
       email: student.email || '',
       major: student.major || ''
@@ -89,9 +89,9 @@ export default function StudentList({ onRefresh }) {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   <input 
                     type="text" 
-                    value={editForm.mssv} 
-                    onChange={(e) => setEditForm({ ...editForm, mssv: e.target.value })} 
-                    placeholder="MSSV"
+                    value={editForm.id} 
+                    onChange={(e) => setEditForm({ ...editForm, id: e.target.value })} 
+                    placeholder="ID / MSSV"
                     style={{ padding: '10px', borderRadius: '6px', border: '1px solid #475569', backgroundColor: '#0f172a', color: '#f8fafc' }}
                   />
                   <input 
@@ -124,7 +124,7 @@ export default function StudentList({ onRefresh }) {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                   <div style={{ color: '#f8fafc', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
                     <span style={{ backgroundColor: '#0f172a', color: '#38bdf8', padding: '4px 8px', borderRadius: '6px', fontSize: '14px', border: '1px solid #334155', fontWeight: 'bold' }}>
-                      {sv.mssv || sv.id || sv.studentId || (sv._id ? sv._id.slice(-6) : 'Chưa có MSSV')}
+                      {sv.id || sv.mssv || sv.studentId || (sv._id ? sv._id.slice(-6) : 'Chưa có ID')}
                     </span>
                     <span style={{ fontWeight: '700', color: '#f1f5f9' }}>{sv.name}</span>
                     <span style={{ color: '#94a3b8' }}>- {sv.email}</span>
