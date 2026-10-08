@@ -43,7 +43,7 @@ export default function StudentList({ onRefresh }) {
   const handleEditClick = (student) => {
     setEditingId(student._id);
     setEditForm({
-      mssv: student.mssv || student.id || '',
+      mssv: student.mssv || student.id || student.studentId || '',
       name: student.name || '',
       email: student.email || '',
       major: student.major || ''
@@ -124,7 +124,7 @@ export default function StudentList({ onRefresh }) {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                   <div style={{ color: '#f8fafc', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
                     <span style={{ backgroundColor: '#0f172a', color: '#38bdf8', padding: '4px 8px', borderRadius: '6px', fontSize: '14px', border: '1px solid #334155', fontWeight: 'bold' }}>
-                      {sv.mssv || sv.id || 'Chưa có MSSV'}
+                      {sv.mssv || sv.id || sv.studentId || (sv._id ? sv._id.slice(-6) : 'Chưa có MSSV')}
                     </span>
                     <span style={{ fontWeight: '700', color: '#f1f5f9' }}>{sv.name}</span>
                     <span style={{ color: '#94a3b8' }}>- {sv.email}</span>
